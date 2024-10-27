@@ -21,15 +21,15 @@ mod tests {
 
     #[test]
     fn test_partial_eq() {
-        let title = "title";
-        let description = "description";
+        let title: &str = "title";
+        let description: &str = "description";
         let status = "To-Do";
         let ticket1 = Ticket {
             title: title.to_string(),
             description: description.to_string(),
             status: status.to_string(),
         };
-        let ticket2 = Ticket {
+        let ticket2: Ticket = Ticket {
             title: title.to_string(),
             description: description.to_string(),
             status: status.to_string(),
