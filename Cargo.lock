@@ -446,6 +446,10 @@ dependencies = [
 [[package]]
 name = "deps"
 version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "thiserror",
+]
 
 [[package]]
 name = "deref"
@@ -2180,6 +2184,7 @@ name = "thiserror_"
 version = "0.1.0"
 dependencies = [
  "common",
+ "thiserror",
 ]
 
 [[package]]
