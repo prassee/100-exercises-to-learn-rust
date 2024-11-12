@@ -1,3 +1,5 @@
+use std::collections::vec_deque::Iter;
+
 use ticket_fields::{TicketDescription, TicketTitle};
 
 // TODO: Provide an `iter` method that returns an iterator over `&Ticket` items.
@@ -5,6 +7,14 @@ use ticket_fields::{TicketDescription, TicketTitle};
 pub struct TicketStore {
     tickets: Vec<Ticket>,
 }
+
+// impl Iterator for TicketStore {
+//     type Item = &'static Ticket;
+
+//     fn next(&mut self) -> Option<Self::Item> {
+//         self.next()
+//     }
+// }
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Ticket {
@@ -30,6 +40,11 @@ impl TicketStore {
     pub fn add_ticket(&mut self, ticket: Ticket) {
         self.tickets.push(ticket);
     }
+    
+    fn iter(&self) -> std::slice::Iter<'_, Ticket>  {
+        self.tickets.iter()
+    }
+
 }
 
 #[cfg(test)]
