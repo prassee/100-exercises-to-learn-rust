@@ -52,7 +52,6 @@ impl TicketStore {
             description: ticket.description,
             status: Status::ToDo,
         };
-        todo!();
         id
     }
 

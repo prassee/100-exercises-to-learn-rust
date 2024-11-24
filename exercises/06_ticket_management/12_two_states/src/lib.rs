@@ -6,11 +6,14 @@
 // You also need to add a `get` method that takes as input a `TicketId`
 // and returns an `Option<&Ticket>`.
 
+use std::u64;
+
 use ticket_fields::{TicketDescription, TicketTitle};
 
 #[derive(Clone)]
 pub struct TicketStore {
     tickets: Vec<Ticket>,
+    last_genticket: u64,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -41,11 +44,23 @@ impl TicketStore {
     pub fn new() -> Self {
         Self {
             tickets: Vec::new(),
+            last_genticket: 0,
         }
     }
 
-    pub fn add_ticket(&mut self, ticket: Ticket) {
-        self.tickets.push(ticket);
+    pub fn add_ticket(&mut self, ticket: TicketDraft) -> TicketId {
+        self.last_genticket = self.last_genticket + 1;
+        self.tickets.push(Ticket {
+            id: TicketId(self.last_genticket),
+            title: ticket.title,
+            description: ticket.description,
+            status: Status::ToDo,
+        });
+        TicketId(self.last_genticket)
+    }
+
+    fn get(&self, id: TicketId) -> Option<&Ticket> {
+        self.tickets.iter().find(|&x| x.id == id)
     }
 }
 
@@ -57,7 +72,6 @@ mod tests {
     #[test]
     fn works() {
         let mut store = TicketStore::new();
-
         let draft1 = TicketDraft {
             title: ticket_title(),
             description: ticket_description(),

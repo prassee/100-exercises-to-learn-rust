@@ -18,11 +18,11 @@ pub fn fibonacci(n: u32) -> u32 {
     let mut fib_numbers: Vec<u32> = Vec::new();
     fib_numbers.push(0);
     fib_numbers.push(1);
-    
+
     match fib_numbers.get(n as usize) {
         Some(n) => *n,
         None => {
-            for _ in 2 .. n + 1 {
+            for _ in 2..n + 1 {
                 fib_numbers
                     .push(fib_numbers[fib_numbers.len() - 1] + fib_numbers[fib_numbers.len() - 2]);
             }
